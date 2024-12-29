@@ -36,7 +36,7 @@ public abstract class Member {
 		this.phone = phone;
 	}
 
-	public String viewDetails() {
+	public String viewProfile() {
 		return "Member [name=" + name + ", age=" + age + ", phone=" + phone + "]";
 	}
 	

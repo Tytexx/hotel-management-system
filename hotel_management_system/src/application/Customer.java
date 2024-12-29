@@ -1,9 +1,12 @@
 package application;
 
+import java.util.ArrayList;
+
 public class Customer extends Member{
 	
 	private String customerID;
 	private String cardType;
+	private ArrayList <Order> orders = new ArrayList<>();
 	
 	
 	public Customer(String name, int age, String phone, String customerID, String cardType) {
