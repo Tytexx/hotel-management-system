@@ -159,6 +159,8 @@ public class Main extends Application {
 			Text t4_4 = new Text("Phone");
 			Text t4_5 = new Text("Customer ID");
 			
+			
+			
 			TextField tf4_2 = new TextField();
 			TextField tf4_3 = new TextField();
 			TextField tf4_4 = new TextField();
