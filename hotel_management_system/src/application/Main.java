@@ -21,12 +21,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
-	
-	private static ArrayList <Member> members = new ArrayList<>();
-	
-	public static ArrayList<Member> getMembers() {
-		return members;
-	}
+
+	private static ArrayList<Member> members = Member.getMembers();
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -120,8 +116,8 @@ public class Main extends Application {
 			Text t3_2 = new Text("Select Option to Manage Member");
 			Text t3_3 = new Text("What member would you like to manage?");
 
-			Button b3_1 = new Button("Add Customer");
-			Button b3_2 = new Button("Remove Customer");
+			Button addCustomer = new Button("Add Customer");
+			Button removeCustomer = new Button("Remove Customer");
 			Button b3_3 = new Button("Update Customer");
 			Button b3_4 = new Button("View All Customers");
 
@@ -129,8 +125,8 @@ public class Main extends Application {
 
 			GridPane.setHalignment(t3_1, javafx.geometry.HPos.CENTER);
 			GridPane.setHalignment(t3_2, javafx.geometry.HPos.CENTER);
-			GridPane.setHalignment(b3_1, javafx.geometry.HPos.CENTER);
-			GridPane.setHalignment(b3_2, javafx.geometry.HPos.CENTER);
+			GridPane.setHalignment(addCustomer, javafx.geometry.HPos.CENTER);
+			GridPane.setHalignment(removeCustomer, javafx.geometry.HPos.CENTER);
 			GridPane.setHalignment(b3_3, javafx.geometry.HPos.CENTER);
 			GridPane.setHalignment(b3_4, javafx.geometry.HPos.CENTER);
 
@@ -143,18 +139,18 @@ public class Main extends Application {
 
 			t1.setTextAlignment(TextAlignment.CENTER);
 
-			root3.add(b3_1, 0, 3);
-			root3.add(b3_2, 0, 4);
+			root3.add(addCustomer, 0, 3);
+			root3.add(removeCustomer, 0, 4);
 			root3.add(b3_3, 0, 5);
 			root3.add(b3_4, 0, 6);
 
-			b3_1.setAlignment(Pos.CENTER);
-			b3_2.setAlignment(Pos.CENTER);
+			addCustomer.setAlignment(Pos.CENTER);
+			removeCustomer.setAlignment(Pos.CENTER);
 
 			// Scene 4
 
 			GridPane root4 = new GridPane();
-			Scene scene4 = new Scene(root4, 400, 400);
+			Scene addCustomerScene = new Scene(root4, 400, 400);
 
 			Text t4_1 = new Text("Add Customer");
 			t4_1.setFont(Font.font(20));
@@ -165,6 +161,8 @@ public class Main extends Application {
 			Text t4_3 = new Text("Age");
 			Text t4_4 = new Text("Phone");
 			Text t4_6 = new Text("Card");
+
+			Text added = new Text("Member Successfully Added");
 
 			TextField tf4_2 = new TextField();
 			TextField tf4_3 = new TextField();
@@ -185,6 +183,8 @@ public class Main extends Application {
 			root4.add(t4_3, 0, 2);
 			root4.add(t4_4, 0, 3);
 			root4.add(t4_6, 0, 4);
+			root4.add(added, 1, 7);
+			added.setVisible(false);
 
 			root4.add(tf4_2, 1, 1);
 			root4.add(tf4_3, 1, 2);
@@ -194,6 +194,44 @@ public class Main extends Application {
 			root4.add(b4_1, 0, 0);
 			root4.add(b4_2, 0, 6);
 			root4.add(b4_3, 1, 6);
+
+			// Remove Customer - Scene
+			GridPane root5 = new GridPane();
+			Scene remCustomerScene = new Scene(root5, 400, 400);
+
+			Text t5_1 = new Text("Remove Customer");
+			t5_1.setFont(Font.font(20));
+			t5_1.setTextAlignment(TextAlignment.CENTER);
+			t5_1.setStroke(Color.RED);
+
+			Text t5_2 = new Text("Name");
+			Text t5_3 = new Text("Phone");
+
+			Text removed = new Text("Member Successfully Removed");
+
+			TextField tf5_2 = new TextField();
+			TextField tf5_3 = new TextField();
+
+			Button b5_1 = new Button("Back");
+			Button b5_2 = new Button("Clear All");
+			Button b5_3 = new Button("Add Member");
+
+			root5.setHgap(10);
+			root5.setVgap(10);
+			root5.setAlignment(Pos.CENTER);
+
+			root5.add(t5_1, 1, 0);
+			root5.add(t5_2, 0, 1);
+			root5.add(t5_3, 0, 2);
+			root5.add(removed, 1, 3);
+			added.setVisible(false);
+
+			root5.add(tf5_2, 1, 1);
+			root5.add(tf5_3, 1, 2);
+
+			root5.add(b5_1, 0, 0);
+			root5.add(b5_2, 0, 6);
+			root5.add(b5_3, 1, 6);
 
 			primaryStage.setScene(scene1);
 			primaryStage.show();
@@ -206,12 +244,24 @@ public class Main extends Application {
 				primaryStage.setScene(scene3);
 			});
 
-			b3_1.setOnAction(e -> {
-				primaryStage.setScene(scene4);
+			addCustomer.setOnAction(e -> {
+				primaryStage.setScene(addCustomerScene);
+			});
+
+			removeCustomer.setOnAction(e -> {
+				primaryStage.setScene(remCustomerScene);
+			});
+
+			// Add Customer Actions
+
+			b4_1.setOnAction(e -> {
+				primaryStage.setScene(scene3);
 			});
 
 			b4_2.setOnAction(e -> {
-
+				tf4_2.clear();
+				tf4_3.clear();
+				tf4_4.clear();
 			});
 
 			b4_3.setOnAction(e -> {
@@ -225,7 +275,38 @@ public class Main extends Application {
 				tf4_2.clear();
 				tf4_3.clear();
 				tf4_4.clear();
+				Member.addMember(customer);
+				System.out.println(members.toString());
+				added.setVisible(true);
 			});
+
+			// Remove Customer Actions
+			b5_1.setOnAction(e -> {
+				primaryStage.setScene(scene3);
+
+			});
+			
+			b5_2.setOnAction(e -> {
+				tf5_2.clear();
+				tf5_3.clear();
+			});
+			
+			b5_3.setOnAction(e -> {
+				String name = tf5_2.getText();
+				String phone = tf5_3.getText();
+
+				tf4_2.clear();
+				tf4_3.clear();
+				tf4_4.clear();
+				
+				
+				System.out.println(members.toString());
+				String removedTemp = Member.removeMember(name,phone);
+				removed.setText(removedTemp);
+				removed.setVisible(true);
+			});
+
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
