@@ -9,9 +9,8 @@ public class Customer extends Member{
 	private ArrayList <Order> orders = new ArrayList<>();
 	
 	
-	public Customer(String name, int age, String phone, String customerID, String cardType) {
+	public Customer(String name, int age, String phone , String cardType) {
 		super(name, age, phone);
-		this.customerID = customerID;
 		this.cardType = cardType;
 	}
 	

@@ -1,15 +1,17 @@
 package application;
 
-
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -17,6 +19,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -61,8 +64,6 @@ public class Main extends Application {
 			b2.setAlignment(Pos.CENTER);
 			b3.setAlignment(Pos.CENTER);
 			b4.setAlignment(Pos.CENTER);
-			
-
 
 			// Scene 2
 			GridPane root2 = new GridPane();
@@ -139,42 +140,33 @@ public class Main extends Application {
 			root3.add(b3_3, 0, 5);
 			root3.add(b3_4, 0, 6);
 
-			
-
 			b3_1.setAlignment(Pos.CENTER);
 			b3_2.setAlignment(Pos.CENTER);
-			
-			//Scene 4
-			
+
+			// Scene 4
+
 			GridPane root4 = new GridPane();
 			Scene scene4 = new Scene(root4, 400, 400);
-			
+
 			Text t4_1 = new Text("Add Customer");
 			t4_1.setFont(Font.font(20));
 			t4_1.setTextAlignment(TextAlignment.CENTER);
 			t4_1.setStroke(Color.RED);
-			
+
 			Text t4_2 = new Text("Name");
 			Text t4_3 = new Text("Age");
 			Text t4_4 = new Text("Phone");
-			Text t4_5 = new Text("Customer ID");
-			
-			
-			
+			Text t4_6 = new Text("Card");
+
 			TextField tf4_2 = new TextField();
 			TextField tf4_3 = new TextField();
 			TextField tf4_4 = new TextField();
-			TextField tf4_5 = new TextField();
+			ComboBox<String> cardBox = new ComboBox<String>();
+			cardBox.getItems().addAll("Master Card", "VISA", "Western Union");
 
-
-
-			
-//			GridPane.setHalignment(t4_1, javafx.geometry.HPos.CENTER);
-//			GridPane.setHalignment(tf3_2, javafx.geometry.HPos.CENTER);
-//			GridPane.setHalignment(b3_1, javafx.geometry.HPos.CENTER);
-//			GridPane.setHalignment(b3_2, javafx.geometry.HPos.CENTER);
-//			GridPane.setHalignment(b3_3, javafx.geometry.HPos.CENTER);
-//			GridPane.setHalignment(b3_4, javafx.geometry.HPos.CENTER);
+			Button b4_1 = new Button("Back");
+			Button b4_2 = new Button("Clear All");
+			Button b4_3 = new Button("Add Member");
 
 			root4.setHgap(10);
 			root4.setVgap(10);
@@ -184,38 +176,48 @@ public class Main extends Application {
 			root4.add(t4_2, 0, 1);
 			root4.add(t4_3, 0, 2);
 			root4.add(t4_4, 0, 3);
-			root4.add(t4_5, 0, 4);
-			
+			root4.add(t4_6, 0, 4);
+
 			root4.add(tf4_2, 1, 1);
 			root4.add(tf4_3, 1, 2);
 			root4.add(tf4_4, 1, 3);
-			root4.add(tf4_5, 1, 4);
-			
-			
-			
+			root4.add(cardBox, 1, 4);
 
-			
-			
-			
-			
+			root4.add(b4_1, 0, 0);
+			root4.add(b4_2, 0, 6);
+			root4.add(b4_3, 1, 6);
 
-			
 			primaryStage.setScene(scene1);
 			primaryStage.show();
-			
-			b1.setOnAction(e-> {
+
+			b1.setOnAction(e -> {
 				primaryStage.setScene(scene2);
 			});
-			
-			b2_1.setOnAction(e-> {
+
+			b2_1.setOnAction(e -> {
 				primaryStage.setScene(scene3);
 			});
-			
-			b3_1.setOnAction(e-> {
+
+			b3_1.setOnAction(e -> {
 				primaryStage.setScene(scene4);
 			});
 
+			b4_2.setOnAction(e -> {
 
+			});
+
+			b4_3.setOnAction(e -> {
+				String name = tf4_2.getText();
+				int age = Integer.parseInt(tf4_3.getText());
+				String phone = tf4_4.getText();
+				String cardType = cardBox.getSelectionModel().getSelectedItem();
+				Customer customer = new Customer(name, age, phone, cardType);
+				System.out.println("Member Added Successfully");
+
+				tf4_2.clear();
+				tf4_3.clear();
+				tf4_4.clear();
+			});
 
 		} catch (Exception e) {
 			e.printStackTrace();
