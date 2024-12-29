@@ -1,11 +1,21 @@
 package application;
 
-public class Member {
+public abstract class Member {
 	
 	private String name;
 	private int age;
 	private String phone;
 	
+	public Member(String name, int age, String phone) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.phone = phone;
+	}	
+	
+	public Member() {
+		
+	}
 	
 	public String getName() {
 		return name;
@@ -25,6 +35,14 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public String viewDetails() {
+		return "Member [name=" + name + ", age=" + age + ", phone=" + phone + "]";
+	}
+	
+	
+	
+
 	
 	
 
