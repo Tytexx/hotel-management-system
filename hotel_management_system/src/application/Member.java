@@ -1,10 +1,14 @@
 package application;
 
+import java.util.ArrayList;
+
 public abstract class Member {
 	
 	private String name;
 	private int age;
 	private String phone;
+	private static ArrayList <Member> members = Main_System.getMembers();
+
 	
 	public Member(String name, int age, String phone) {
 		super();
@@ -15,6 +19,18 @@ public abstract class Member {
 	
 	public Member() {
 		
+	}
+	
+	public void addMember(Member member) {
+		members.add(member);
+	}
+	
+	public void removeMember(Member member) {
+		members.remove(member);
+	}
+	
+	public void updateMember(Member member) {
+		members.add(member);
 	}
 	
 	public String getName() {
