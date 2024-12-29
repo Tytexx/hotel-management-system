@@ -7,7 +7,7 @@ public abstract class Member {
 	private String name;
 	private int age;
 	private String phone;
-	private static ArrayList <Member> members = Main_System.getMembers();
+	private static ArrayList <Member> members = Main.getMembers();
 
 	
 	public Member(String name, int age, String phone) {

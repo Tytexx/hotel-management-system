@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -19,6 +21,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
+	
+	private static ArrayList <Member> members = new ArrayList<>();
+	
+	public static ArrayList<Member> getMembers() {
+		return members;
+	}
 
 	@Override
 	public void start(Stage primaryStage) {
