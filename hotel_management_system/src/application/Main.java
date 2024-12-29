@@ -162,7 +162,7 @@ public class Main extends Application {
 			Text t4_4 = new Text("Phone");
 			Text t4_6 = new Text("Card");
 
-			Text added = new Text("Member Successfully Added");
+			Text added = new Text("");
 
 			TextField tf4_2 = new TextField();
 			TextField tf4_3 = new TextField();
@@ -224,7 +224,7 @@ public class Main extends Application {
 			root5.add(t5_2, 0, 1);
 			root5.add(t5_3, 0, 2);
 			root5.add(removed, 1, 3);
-			added.setVisible(false);
+			removed.setVisible(false);
 
 			root5.add(tf5_2, 1, 1);
 			root5.add(tf5_3, 1, 2);
@@ -267,17 +267,27 @@ public class Main extends Application {
 			b4_3.setOnAction(e -> {
 				String name = tf4_2.getText();
 				int age = Integer.parseInt(tf4_3.getText());
-				String phone = tf4_4.getText();
-				String cardType = cardBox.getSelectionModel().getSelectedItem();
-				Customer customer = new Customer(name, age, phone, cardType);
-				System.out.println("Member Added Successfully");
-
-				tf4_2.clear();
-				tf4_3.clear();
-				tf4_4.clear();
-				Member.addMember(customer);
-				System.out.println(members.toString());
 				added.setVisible(true);
+				String phone = tf4_4.getText();
+				if ((age < 0 || age > 120)) {
+					added.setText("Please Enter Valid Age");
+				} else if (phone.length() != 8) {
+					added.setText("Please Enter Valid Phone Number");
+				} else {
+					added.setText("Member Added Successfully");
+					String cardType = cardBox.getSelectionModel().getSelectedItem();
+					Customer customer = new Customer(name, age, phone, cardType);
+					System.out.println("Member Added Successfully");
+
+					tf4_2.clear();
+					tf4_3.clear();
+					tf4_4.clear();
+					
+					Member.addMember(customer);
+					System.out.println(members.toString());
+					added.setVisible(true);
+				}
+
 			});
 
 			// Remove Customer Actions
@@ -285,12 +295,12 @@ public class Main extends Application {
 				primaryStage.setScene(scene3);
 
 			});
-			
+
 			b5_2.setOnAction(e -> {
 				tf5_2.clear();
 				tf5_3.clear();
 			});
-			
+
 			b5_3.setOnAction(e -> {
 				String name = tf5_2.getText();
 				String phone = tf5_3.getText();
@@ -298,15 +308,12 @@ public class Main extends Application {
 				tf4_2.clear();
 				tf4_3.clear();
 				tf4_4.clear();
-				
-				
+
 				System.out.println(members.toString());
-				String removedTemp = Member.removeMember(name,phone);
+				String removedTemp = Member.removeMember(name, phone);
 				removed.setText(removedTemp);
 				removed.setVisible(true);
 			});
-
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
